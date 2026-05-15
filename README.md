@@ -242,21 +242,7 @@ The project includes:
 
 ---
 
-# ⚙️ Installation
 
-Clone the repository:
-
-```bash
-git clone https://github.com/your-username/customer-rfm-analysis.git
-```
-
-Install required libraries:
-
-```bash
-pip install -r requirements.txt
-```
-
----
 
 # 📦 Requirements
 
