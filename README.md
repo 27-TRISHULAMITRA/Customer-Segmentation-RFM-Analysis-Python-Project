@@ -2,6 +2,12 @@
 
 > End-to-end customer analytics project focused on customer segmentation, RFM analysis, revenue analysis, and business insight generation using Python.
 
+The dataset contains:
+
+- Customer Master Data
+- Customer Transaction Data
+- Jupyter Notebook Files
+- Project Report
 ---
 
 # 📌 Project Overview
@@ -229,16 +235,7 @@ The project includes:
 
 ---
 
-## 📁 Dataset
 
-### [Click Here](./Dataset)
-
-The dataset contains:
-
-- Customer Master Data
-- Customer Transaction Data
-- Jupyter Notebook Files
-- Project Report
   
 
 ```
