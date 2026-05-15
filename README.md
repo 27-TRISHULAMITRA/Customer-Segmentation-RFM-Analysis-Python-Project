@@ -268,8 +268,6 @@ pandas
 numpy
 matplotlib
 jupyter
-```
-
 ---
 
 # 🔮 Future Improvements
