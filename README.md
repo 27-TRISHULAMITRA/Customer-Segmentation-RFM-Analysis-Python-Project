@@ -14,14 +14,24 @@ The dataset contains:
 
 This project focuses on analyzing customer purchasing behavior using **RFM (Recency, Frequency, Monetary) Analysis** and customer segmentation techniques.
 
-The goal of the project was to identify:
-- High-value customers
-- Customer spending patterns
-- Revenue contribution by customer groups
-- Customer retention opportunities
-- Customer churn risks
+This project performs Customer Segmentation using the RFM (Recency, Frequency, Monetary) model. The analysis helps businesses identify their most valuable customers, understand purchasing behavior, and create targeted marketing strategies.
 
-The project was independently developed using Python for data cleaning, preprocessing, analysis, visualization, and business insight generation.
+The project uses customer master data and transaction data to calculate RFM metrics and categorize customers into different segments.
+
+---
+
+## Objectives
+
+- Clean and validate customer and transaction datasets
+- Merge customer and transaction information
+- Calculate RFM metrics:
+  - Recency
+  - Frequency
+  - Monetary Value
+- Generate RFM scores using quantile-based ranking
+- Create customer segments
+- Visualize customer distribution and revenue contribution
+- Perform Pareto Analysis on customer revenue
 
 ---
 
@@ -44,7 +54,6 @@ This project solves these business problems through customer segmentation and da
 - Pandas
 - NumPy
 - Matplotlib
-- Seaborn
 - Jupyter Notebook
 
 ---
@@ -133,12 +142,13 @@ Combined RFM scores were then used to classify customer behavior.
 # 👥 Customer Segmentation
 
 Customers were segmented into:
-- Champions
-- Big Spenders
-- Frequent Customers
-- Recent Customers
-- Lost Customers
-- Others
+|----------|-------------|
+| Champions | Most valuable customers |
+| Big Spender | High spending customers |
+| Frequent | Customers who purchase often |
+| Recent | Recently active customers |
+| Lost | Inactive customers |
+| Others | Average customers |
 
 ---
 
@@ -198,12 +208,21 @@ This suggests:
 
 The project includes:
 - Customer Segment Distribution Chart
-- Revenue Contribution Pie Chart
-- Pareto Analysis Chart
+- Revenue Contribution  Pie Chart
 - Recency vs Monetary Scatter Plot
+- Pareto Analysis Chart
 - Segment-wise Revenue Distribution Graphs
 
 ---
+
+## Key Insights
+
+- Champions represent the most loyal and valuable customers.
+- Big Spenders contribute a significant share of revenue.
+- Recent customers show strong engagement potential.
+- Lost customers may require re-engagement campaigns.
+- Revenue is distributed across a broad customer base rather than following the traditional 80/20 Pareto rule.
+
 
 # 📌 Business Recommendations
 
@@ -235,42 +254,20 @@ The project includes:
 
 ---
 
+## Future Improvements
 
+- Advanced customer lifetime value prediction
+- Machine learning-based segmentation
+- Interactive dashboards using Power BI or Tableau
+- Automated marketing recommendations
   
 
 ```
 
----
+## Author
 
+Trishula Mitra
 
+## License
 
-# 📦 Requirements
-
-```txt
-pandas
-numpy
-matplotlib
-jupyter
----
-
-# 🔮 Future Improvements
-
-- Build interactive dashboards using Streamlit or Power BI
-- Implement machine learning-based customer clustering
-- Develop customer churn prediction models
-- Automate reporting workflows
-
----
-
-# 👨‍💻 Author
-
-Developed independently by Trishula Mitra
-
----
-
-# 📷 Sample Visualizations
-
-- Pareto Analysis Chart
-- Revenue Contribution by Segment
-- Customer Segment Distribution
-- Recency vs Monetary Scatter Plot
+This project is for learning and educational purposes.
