@@ -1,273 +1,126 @@
 #  customer-rfm-analysis-Project
 
-> End-to-end customer analytics project focused on customer segmentation, RFM analysis, revenue analysis, and business insight generation using Python.
 
-The dataset contains:
 
-- Customer Master Data
-- Customer Transaction Data
-- Jupyter Notebook Files
-- Project Report
----
+An end-to-end *RFM (Recency, Frequency, Monetary) analysis* in Python — segmenting 1,000 customers based on real transaction behavior to identify Champions, Big Spenders, Recent, Frequent, and Lost customers, followed by a Pareto (80/20) revenue analysis.
 
-# 📌 Project Overview
 
-This project focuses on analyzing customer purchasing behavior using **RFM (Recency, Frequency, Monetary) Analysis** and customer segmentation techniques.
 
-This project performs Customer Segmentation using the RFM (Recency, Frequency, Monetary) model. The analysis helps businesses identify their most valuable customers, understand purchasing behavior, and create targeted marketing strategies.
 
-The project uses customer master data and transaction data to calculate RFM metrics and categorize customers into different segments.
+##  Project Overview
 
----
-
-## Objectives
-
-- Clean and validate customer and transaction datasets
-- Merge customer and transaction information
-- Calculate RFM metrics:
-  - Recency
-  - Frequency
-  - Monetary Value
-- Generate RFM scores using quantile-based ranking
-- Create customer segments
-- Visualize customer distribution and revenue contribution
-- Perform Pareto Analysis on customer revenue
+| | |
+|---|---|
+| *Project Name* | Customer Segmentation using RFM Analysis |
+| *Objective* | Segment customers by purchasing behavior and identify the most valuable customer groups |
+| *Dataset* | Customer Master Data + Customer Transactions (1,000 customers, 23,050 transactions) |
+| *Tools Used* | Python — Pandas, NumPy, Matplotlib (Jupyter / Google Colab) |
+| *File Type* | Jupyter Notebook (.ipynb) |
 
 ---
 
-# 🚀 Business Problem
+##  Business Problem
 
-Businesses often face challenges in:
-- Identifying their most valuable customers
-- Understanding customer purchasing behavior
-- Detecting inactive or churn-risk customers
-- Improving retention strategies
-- Increasing revenue through targeted marketing
-
-This project solves these business problems through customer segmentation and data-driven analysis.
+A business with a large, growing customer base needs to know *who its most valuable customers are* — and who is at risk of churning — so it can prioritize retention and marketing spend. RFM analysis answers this by scoring every customer on how recently they bought, how often they buy, and how much they spend.
 
 ---
 
-# 🛠️ Tech Stack
+## 🗂️ Dataset
 
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- Jupyter Notebook
+*Customer Master Data* — one row per customer (CustomerID, JoinDate, demographic fields)
+*Customer Transactions* — one row per transaction (CustomerID, TransactionDate, TransactionAmount)
 
----
-
-# 📂 Dataset Information
-
-The project uses two datasets:
-
-## 1️⃣ Customer Master Dataset
-Contains customer demographic details such as:
-- CustomerID
-- Name
-- Gender
-- Age
-- City
-- Marital Status
-- Number of Children
-- Join Date
-
-## 2️⃣ Customer Transactions Dataset
-Contains:
-- CustomerID
-- Transaction Date
-- Transaction Amount
+After cleaning, all *23,050 transaction records* contained valid `CustomerID`s that matched the customer master dataset, confirming full data consistency.
 
 ---
 
-# 📊 Dataset Highlights
+##  Project Workflow
 
-- Total Customers: **1,000**
-- Total Transactions: **23,050**
-- Customer-centric transaction analysis
-- Revenue-based purchasing behavior analysis
+### Step 1 — Load the Data
+Loaded the Customer Master and Customer Transactions CSVs into Pandas DataFrames and previewed shape, structure, and data types.
 
----
+### Step 2 — Clean the Data
+- Converted JoinDate and TransactionDate to proper datetime format.
+- Checked for and handled missing values (dropna).
+- Validated CustomerID uniqueness in the master table and confirmed every transaction's CustomerID existed in the master dataset.
 
-# ⚙️ Project Workflow
+### Step 3 — Merge Datasets
+Left-joined Customer_Transactions with Customer_Master_Data on CustomerID to build a single analysis-ready DataFrame.
 
-## ✅ Data Loading
-- Imported datasets using Pandas
-- Checked dataset structure and datatypes
-- Previewed customer and transaction records
+### Step 4 — Calculate RFM Metrics
+Using groupby('CustomerID'):
+- *Recency* — days since each customer's most recent transaction
+- *Frequency* — count of transactions per customer
+- *Monetary* — total transaction amount per customer
 
----
+### Step 5 — Score RFM
+Used pd.qcut() to bucket each metric into quintiles, producing R_Score, F_Score, and M_Score (1–5 each).
 
-## ✅ Data Cleaning & Preprocessing
+### Step 6 — Build Combined RFM Segment
+Concatenated the three scores into a single segment code (e.g., "555", "111").
 
-Performed:
-- Datatype conversion
-- Missing value detection
-- Duplicate validation
-- CustomerID consistency validation
-- Date formatting
-- Dataset merging
+### Step 7 — Assign Segment Labels
+Applied business rules to translate segment codes into human-readable labels:
 
-The datasets were cleaned and validated successfully without major inconsistencies.
+| Segment Code Pattern | Label |
+|---|---|
+| 555 | Champions |
+| 111 | Lost |
+| R = 5 (not 555) | Recent |
+| F = 5 (not 555) | Frequent |
+| M = 5 (not 555) | Big Spender |
+| All other combinations | Others |
 
----
-
-## ✅ RFM Analysis
-
-### RFM Metrics Used
-
-### 🔹 Recency (R)
-Days since the customer's last purchase.
-
-### 🔹 Frequency (F)
-Total number of purchases made by the customer.
-
-### 🔹 Monetary (M)
-Total amount spent by the customer.
+### Step 8 — Visualize & Analyze
+- Bar chart of customer count per segment
+- Pie chart of revenue contribution per segment
+- Recency vs. Monetary scatter plot, colored by segment
+- *Pareto analysis* — tested whether the top 20% of customers generate 80% of revenue
 
 ---
 
-## ✅ RFM Scoring
+##  Key Insights
 
-Customers were scored using quantile-based segmentation:
-- R Score → 1 to 5
-- F Score → 1 to 5
-- M Score → 1 to 5
-
-Combined RFM scores were then used to classify customer behavior.
-
----
-
-# 👥 Customer Segmentation
-
-Customers were segmented into:
-|----------|-------------|
-| Champions | Most valuable customers |
-| Big Spender | High spending customers |
-| Frequent | Customers who purchase often |
-| Recent | Recently active customers |
-| Lost | Inactive customers |
-| Others | Average customers |
+- *Largest segment:* "Others" (543 customers) — a broad group with average, non-extreme purchasing behavior.
+- *Champions:* only 35 customers, but they show the highest recency, frequency, and spend — the most valuable and loyal segment.
+- *Big Spenders:* 165 customers contribute *22.3% of total revenue*, making them a high-leverage segment despite their smaller size.
+- *Recency vs. spend relationship:* customers who purchased more recently (0–30 days) tend to spend more, suggesting a negative relationship between recency and monetary value.
+- *Pareto (80/20) rule does not hold:* the top 20% of customers do *not* generate 80% of revenue — revenue is more evenly spread across the customer base, meaning the business depends on a broad base rather than a small high-value group.
 
 ---
 
-# 📈 Key Insights from the Analysis
+##  Skills Demonstrated
 
-## 🔹 Champion Customers
-Only **35 customers** were categorized as **Champions**, but they generated very high transaction value with strong recent engagement and frequent purchasing behavior.
-
-These customers represent the most valuable segment of the business.
-
----
-
-## 🔹 Big Spender Insight
-The **Big Spender** segment consisted of approximately **165 customers** contributing a significantly high share of total business revenue.
-
-This indicates that a smaller group of customers drives premium sales performance.
+- Data cleaning, type conversion, and referential integrity validation across multiple datasets
+- Multi-table merging with Pandas (pd.merge)
+- RFM metric calculation using groupby, aggregation, and datetime arithmetic
+- Quantile-based scoring (pd.qcut) and rule-based customer segmentation
+- Data visualization: bar charts, pie charts, and multi-color scatter plots
+- Pareto / cumulative revenue analysis
 
 ---
 
-## 🔹 Revenue Concentration Insight
-The top **20% of customers contributed approximately 27% of total revenue**, indicating that revenue distribution is more balanced and does not strictly follow the traditional Pareto 80/20 principle.
+##  How to Use
+
+1. Clone/download this repository.
+2. Open python_Mini_Project.ipynb in Jupyter Notebook, JupyterLab, or Google Colab.
+3. Update the file paths for Customer_Master_Data and Customer_Transactions CSVs to point to your local copies.
+4. Run all cells sequentially — each step includes inline analysis insights.
 
 ---
 
-## 🔹 Lost Customer Insight
-Around **34 customers** were identified as **Lost Customers**, showing:
-- Low purchase activity
-- Lower spending behavior
-- High recency values
-
-These customers represent potential churn risks for the business.
-
----
-
-## 🔹 Spending Pattern Insight
-Customers with:
-- Lower recency values
-- Higher transaction frequency
-
-generally demonstrated significantly higher monetary contribution.
-
-This shows a strong relationship between customer engagement and revenue generation.
-
----
-
-## 🔹 Revenue Distribution Insight
-The analysis showed that revenue generation is distributed across multiple customer segments instead of depending heavily on only a few customers.
-
-This suggests:
-- Better revenue stability
-- Reduced dependency risk
-- Balanced customer contribution
-
----
-
-# 📊 Visualizations Created
-
-The project includes:
-- Customer Segment Distribution Chart
-- Revenue Contribution  Pie Chart
-- Recency vs Monetary Scatter Plot
-- Pareto Analysis Chart
-- Segment-wise Revenue Distribution Graphs
-
----
-
-## Key Insights
-
-- Champions represent the most loyal and valuable customers.
-- Big Spenders contribute a significant share of revenue.
-- Recent customers show strong engagement potential.
-- Lost customers may require re-engagement campaigns.
-- Revenue is distributed across a broad customer base rather than following the traditional 80/20 Pareto rule.
 
 
-# 📌 Business Recommendations
 
-## ✅ Retain Champion Customers
-- Loyalty programs
-- Premium rewards
-- Exclusive access offers
 
----
 
-## ✅ Re-engage Lost Customers
-- Personalized email campaigns
-- Discount offers
-- Customer win-back strategies
 
----
 
-## ✅ Increase Customer Frequency
-- Cross-selling
-- Product recommendations
-- Repeat purchase incentives
 
----
 
-## ✅ Focus on High Monetary Customers
-- VIP benefits
-- Personalized communication
-- Premium customer experience
 
----
 
-## Future Improvements
 
-- Advanced customer lifetime value prediction
-- Machine learning-based segmentation
-- Interactive dashboards using Power BI or Tableau
-- Automated marketing recommendations
-  
 
-```
-
-## Author
-
-Trishula Mitra
-
-## License
 
 This project is for learning and educational purposes.
