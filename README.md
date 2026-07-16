@@ -1,4 +1,4 @@
-#  customer-rfm-analysis-python
+#  customer-rfm-analysis-Project
 
 > End-to-end customer analytics project focused on customer segmentation, RFM analysis, revenue analysis, and business insight generation using Python.
 
