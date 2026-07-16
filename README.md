@@ -5,6 +5,59 @@
 An end-to-end *RFM (Recency, Frequency, Monetary) analysis* in Python — segmenting 1,000 customers based on real transaction behavior to identify Champions, Big Spenders, Recent, Frequent, and Lost customers, followed by a Pareto (80/20) revenue analysis.
 
 
+## 📈 Visualizatio
+
+
+
+
+<img width="806" height="728" alt="Screenshot 2026-07-16 194241" src="https://github.com/user-attachments/assets/7a6918b5-8575-450a-a282-9e111047b84f" />
+
+
+
+
+
+*Customer Count by Segment
+
+
+---
+
+
+<img width="1040" height="647" alt="Screenshot 2026-07-16 194313" src="https://github.com/user-attachments/assets/9caf7bc6-c01e-4956-9630-b60eb1430868" />
+
+
+
+*Revenue Contribution by Segment 
+
+
+---
+
+
+
+
+<img width="882" height="582" alt="Screenshot 2026-07-16 194431" src="https://github.com/user-attachments/assets/bb3426f1-2794-45c8-b5b7-b26079b69696" />
+
+
+*Recency vs. Monetary Scatter Plot 
+
+
+----
+
+
+
+<img width="1475" height="719" alt="Screenshot 2026-07-16 194500" src="https://github.com/user-attachments/assets/beda3f8b-8cec-4f89-9669-6c6925d13b57" />
+
+
+*Pareto Analysis — Cumulative Revenue vs. Customers
+
+
+
+
+
+
+
+---
+
+
 
 
 ##  Project Overview
@@ -109,18 +162,3 @@ Applied business rules to translate segment codes into human-readable labels:
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-This project is for learning and educational purposes.
